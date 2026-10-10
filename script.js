@@ -14,6 +14,16 @@ function getHumanChoice() {
   return choice.toLowerCase();
 }
 
+function completeGame(humanScore, computerScore) {
+  if (humanScore > computerScore) {
+    return "Ты победил компьютер!";
+  } else if (computerScore > humanScore) {
+    return "Компьютер тебя обыграл, не расстраивайся, такова сила рандома!";
+  } else {
+    return "Ничья, играем снова!";
+  }
+}
+
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
@@ -35,13 +45,18 @@ function playGame() {
       return "Победил компьютер!";
     }
   }
-  const humanSelection = getHumanChoice();
-  const computerSelection = getComputerChoice();
 
-  console.log(humanSelection);
-  console.log(computerSelection);
-  console.log(playRound(humanSelection, computerSelection));
-  console.log(humanScore, computerScore);
+  for (let round = 0; round < 5; round++) {
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+
+    console.log(humanSelection);
+    console.log(computerSelection);
+    console.log(playRound(humanSelection, computerSelection));
+    console.log(humanScore, computerScore);
+  }
+
+  console.log(completeGame(humanScore, computerScore));
 }
 
 playGame();
