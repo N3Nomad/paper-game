@@ -9,11 +9,6 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  let choice = prompt("камень, ножницы или бумага?");
-  return choice.toLowerCase();
-}
-
 function completeGame(humanScore, computerScore) {
   if (humanScore > computerScore) {
     return "Ты победил компьютер!";
@@ -46,17 +41,22 @@ function playGame() {
     }
   }
 
-  for (let round = 0; round < 5; round++) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-
-    console.log(humanSelection);
-    console.log(computerSelection);
-    console.log(playRound(humanSelection, computerSelection));
+  const rockButton = document.querySelector("#rock");
+  rockButton.addEventListener("click", function () {
+    console.log(playRound("камень", getComputerChoice()));
     console.log(humanScore, computerScore);
-  }
+  });
 
-  console.log(completeGame(humanScore, computerScore));
+  const scissorsButton = document.querySelector("#scissors");
+  scissorsButton.addEventListener("click", function () {
+    console.log(playRound("ножницы", getComputerChoice()));
+    console.log(humanScore, computerScore);
+  });
+
+  const paperButton = document.querySelector("#paper");
+  paperButton.addEventListener("click", function () {
+    console.log(playRound("бумага", getComputerChoice()));
+    console.log(humanScore, computerScore);
+  });
 }
-
 playGame();
