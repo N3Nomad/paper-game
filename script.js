@@ -41,22 +41,26 @@ function playGame() {
     }
   }
 
+  const resultDiv = document.querySelector("#result");
+  const scoreDiv = document.querySelector("#score");
+  
+
   const rockButton = document.querySelector("#rock");
   rockButton.addEventListener("click", function () {
-    console.log(playRound("камень", getComputerChoice()));
-    console.log(humanScore, computerScore);
+    resultDiv.textContent = playRound("камень", getComputerChoice());
+    scoreDiv.textContent = (`Твой счет: ${humanScore}, счет компьютера: ${computerScore}`);
   });
 
   const scissorsButton = document.querySelector("#scissors");
   scissorsButton.addEventListener("click", function () {
-    console.log(playRound("ножницы", getComputerChoice()));
-    console.log(humanScore, computerScore);
+    resultDiv.textContent = playRound("ножницы", getComputerChoice());
+    scoreDiv.textContent = (`Твой счет: ${humanScore}, счет компьютера: ${computerScore}`);
   });
 
   const paperButton = document.querySelector("#paper");
   paperButton.addEventListener("click", function () {
-    console.log(playRound("бумага", getComputerChoice()));
-    console.log(humanScore, computerScore);
+    resultDiv.textContent = playRound("бумага", getComputerChoice());
+    scoreDiv.textContent = (`Твой счет: ${humanScore}, счет компьютера: ${computerScore}`);
   });
 }
 playGame();
