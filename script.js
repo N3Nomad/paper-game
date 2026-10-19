@@ -28,13 +28,13 @@ function playGame() {
       return "Ничья!";
     } else if (humanSelection === "камень" && computerSelection === "ножницы") {
       humanScore++;
-      return "Ты победил! Камень бьет ножницы.";
+      return "Ты победил!";
     } else if (humanSelection === "ножницы" && computerSelection === "бумага") {
       humanScore++;
-      return "Ты победил! Ножницы режут бумагу.";
+      return "Ты победил!";
     } else if (humanSelection === "бумага" && computerSelection === "камень") {
       humanScore++;
-      return "Ты победил! Бумага накрывает камень.";
+      return "Ты победил!";
     } else {
       computerScore++;
       return "Победил компьютер!";
@@ -43,7 +43,9 @@ function playGame() {
 
   function handleChoice(humanChoice) {
     winnerDiv.textContent = "";
-    resultDiv.textContent = playRound(humanChoice, getComputerChoice());
+    const computerChoice = getComputerChoice();
+    choicesDiv.textContent = `Ты: ${humanChoice} - Компьютер: ${computerChoice}`;
+    resultDiv.textContent = playRound(humanChoice, computerChoice);
     scoreDiv.textContent = `Твой счет: ${humanScore}, счет компьютера: ${computerScore}`;
 
     if (humanScore === 5 || computerScore === 5) {
@@ -53,6 +55,7 @@ function playGame() {
     }
   }
 
+  const choicesDiv = document.querySelector("#choices");
   const resultDiv = document.querySelector("#result");
   const scoreDiv = document.querySelector("#score");
   const winnerDiv = document.querySelector("#winner");
