@@ -41,26 +41,35 @@ function playGame() {
     }
   }
 
+  function handleChoice(humanChoice) {
+    winnerDiv.textContent = "";
+    resultDiv.textContent = playRound(humanChoice, getComputerChoice());
+    scoreDiv.textContent = `Твой счет: ${humanScore}, счет компьютера: ${computerScore}`;
+
+    if (humanScore === 5 || computerScore === 5) {
+      winnerDiv.textContent = completeGame(humanScore, computerScore);
+      humanScore = 0;
+      computerScore = 0;
+    }
+  }
+
   const resultDiv = document.querySelector("#result");
   const scoreDiv = document.querySelector("#score");
-  
+  const winnerDiv = document.querySelector("#winner");
 
   const rockButton = document.querySelector("#rock");
   rockButton.addEventListener("click", function () {
-    resultDiv.textContent = playRound("камень", getComputerChoice());
-    scoreDiv.textContent = (`Твой счет: ${humanScore}, счет компьютера: ${computerScore}`);
+    handleChoice("камень");
   });
 
   const scissorsButton = document.querySelector("#scissors");
   scissorsButton.addEventListener("click", function () {
-    resultDiv.textContent = playRound("ножницы", getComputerChoice());
-    scoreDiv.textContent = (`Твой счет: ${humanScore}, счет компьютера: ${computerScore}`);
+    handleChoice("ножницы");
   });
 
   const paperButton = document.querySelector("#paper");
   paperButton.addEventListener("click", function () {
-    resultDiv.textContent = playRound("бумага", getComputerChoice());
-    scoreDiv.textContent = (`Твой счет: ${humanScore}, счет компьютера: ${computerScore}`);
+    handleChoice("бумага");
   });
 }
 playGame();
