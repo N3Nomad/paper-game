@@ -4,20 +4,104 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Камень, ножницы, бумага</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✊</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Камень, ножницы, бумага</h1>
-    <div class="game-buttons">
-      <button id="rock">Камень</button>
-      <button id="scissors">Ножницы</button>
-      <button id="paper">Бумага</button>
+    <div class="floating" aria-hidden="true">
+      <span style="--x: 4%; --size: 2.5rem; --duration: 19s; --delay: -2s">✊</span>
+      <span style="--x: 14%; --size: 1.6rem; --duration: 24s; --delay: -12s">✋</span>
+      <span style="--x: 24%; --size: 3rem; --duration: 21s; --delay: -6s">✌️</span>
+      <span style="--x: 36%; --size: 1.8rem; --duration: 27s; --delay: -18s">✊</span>
+      <span style="--x: 48%; --size: 2.2rem; --duration: 23s; --delay: -9s">✋</span>
+      <span style="--x: 60%; --size: 1.5rem; --duration: 20s; --delay: -15s">✌️</span>
+      <span style="--x: 70%; --size: 2.8rem; --duration: 25s; --delay: -4s">✊</span>
+      <span style="--x: 80%; --size: 1.7rem; --duration: 22s; --delay: -20s">✋</span>
+      <span style="--x: 90%; --size: 2.4rem; --duration: 26s; --delay: -10s">✌️</span>
     </div>
 
-    <div id="choices"></div>
-    <div id="result"></div>
-    <div id="score"></div>
-    <div id="winner"></div>
+    <main class="card" id="card">
+      <button
+        class="sound-toggle"
+        id="sound-toggle"
+        aria-label="Звук"
+        aria-pressed="true"
+      >
+        🔊
+      </button>
+
+      <div class="title-emojis" aria-hidden="true">
+        <span>✊</span><span>✌️</span><span>✋</span>
+      </div>
+      <h1 class="title">Камень, ножницы, бумага</h1>
+      <p class="subtitle">Кто первым наберёт 5 очков, тот и победил</p>
+
+      <section class="scoreboard" aria-label="Счёт">
+        <div class="player">
+          <span class="player-name">Ты</span>
+          <span class="player-score" id="human-score">0</span>
+          <span class="progress" id="human-progress"></span>
+        </div>
+        <span class="score-divider">:</span>
+        <div class="player">
+          <span class="player-name">Компьютер</span>
+          <span class="player-score" id="computer-score">0</span>
+          <span class="progress" id="computer-progress"></span>
+        </div>
+      </section>
+
+      <section class="arena" aria-label="Ходы">
+        <span class="hand" id="human-hand">✊</span>
+        <span class="versus">VS</span>
+        <span class="hand" id="computer-hand">✊</span>
+      </section>
+
+      <p class="result" id="result" aria-live="polite">Сделай свой ход!</p>
+      <p class="streak" id="streak"></p>
+
+      <div class="game-buttons">
+        <button class="choice" id="rock">
+          <span class="choice-emoji">✊</span>
+          <span class="choice-label">Камень</span>
+          <span class="choice-key">1</span>
+        </button>
+        <button class="choice" id="scissors">
+          <span class="choice-emoji">✌️</span>
+          <span class="choice-label">Ножницы</span>
+          <span class="choice-key">2</span>
+        </button>
+        <button class="choice" id="paper">
+          <span class="choice-emoji">✋</span>
+          <span class="choice-label">Бумага</span>
+          <span class="choice-key">3</span>
+        </button>
+      </div>
+      <p class="hint">Можно играть клавишами 1, 2, 3</p>
+    </main>
+
+    <div class="overlay hidden" id="game-over">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="final-title"
+      >
+        <span class="modal-emoji" id="final-emoji"></span>
+        <h2 id="final-title"></h2>
+        <p id="final-message"></p>
+        <p class="final-score" id="final-score"></p>
+        <button class="play-again" id="play-again">Играть снова</button>
+      </div>
+    </div>
   </body>
 </html>
